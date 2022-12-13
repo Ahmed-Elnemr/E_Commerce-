@@ -23,8 +23,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::prefix('admin')->group(function () {
-    Route::get('dashbord', [App\Http\Controllers\Admin\DashbordController::class,'index']);
+Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function () {
+    Route::get('dashbord', [App\Http\Controllers\Admin\DashbordController::class,'index'])->name('admin_dashbord');
 });
 
 // Route::get('/test', function () {
