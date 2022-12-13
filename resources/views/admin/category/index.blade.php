@@ -2,6 +2,11 @@
 
 
 @section('content')
+
+@if (session('message'))
+<h3 class="alert alert-success">{{session('message')}}</h3>
+@endif
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">

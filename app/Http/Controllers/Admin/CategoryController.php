@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryFormRequest;
+use Error;
 use Symfony\Component\HttpKernel\Attribute\Cache;
 
 class CategoryController extends Controller
@@ -34,7 +35,7 @@ class CategoryController extends Controller
 
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
-            $fileName = time().'.'.$ext;
+            $fileName = time() . '.' . $ext;
             $file->move('uploads/categorys/', $fileName);
 
             $category->image = $fileName;
@@ -45,7 +46,8 @@ class CategoryController extends Controller
         $category->status = $request->status == true ? '1' : '0';
         $category->save();
 
-        return
-       redirect('admin/category')->with('message','Category Added Successfuly');
+        return redirect()->route('category.index')->with('message', 'Category Added Successfuly');
+
+
     }
 }
