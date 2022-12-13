@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryFormRequest;
 
 class CategoryController extends Controller
 {
@@ -17,9 +18,10 @@ class CategoryController extends Controller
     {
         return view('admin.category.create');
     }
-    function store(Request $request)
+    function store(CategoryFormRequest $request)
     {
-        $data=$request->all();
-        Category::create($data);
+        $validateData = $request->validated();
+        $validateData=$request->all();
+        Category::create($validateData);
     }
 }
