@@ -7,11 +7,9 @@
                     alt="logo" />
 
                 </a> --}}
-                eCom Nemr
-            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg"
-                    alt="logo" /></a>
-            <button class="navbar-toggler navbar-toggler align-self-center" type="button"
-                data-toggle="minimize">
+            eCom Nemr
+            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                 <span class="mdi mdi-sort-variant"></span>
             </button>
         </div>
@@ -37,8 +35,7 @@
                     <i class="mdi mdi-message-text mx-0"></i>
                     <span class="count"></span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                    aria-labelledby="messageDropdown">
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
                     <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
                     <a class="dropdown-item">
                         <div class="item-thumbnail">
@@ -84,8 +81,7 @@
                     <i class="mdi mdi-bell mx-0"></i>
                     <span class="count"></span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                    aria-labelledby="notificationDropdown">
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
                     <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
                     <a class="dropdown-item">
                         <div class="item-thumbnail">
@@ -129,22 +125,34 @@
                 </div>
             </li>
             <li class="nav-item nav-profile dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
-                    id="profileDropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
                     <img src="images/faces/face5.jpg" alt="profile" />
-                    <span class="nav-profile-name">Louis Barnett</span>
+                    <span class="nav-profile-name">  {{ Auth::user()->name }}</span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                    aria-labelledby="profileDropdown">
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                     <a class="dropdown-item">
                         <i class="mdi mdi-settings text-primary"></i>
                         Settings
                     </a>
-                    <a class="dropdown-item">
-                        <i class="mdi mdi-logout text-primary"></i>
-                        Logout
+
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                        <i class="mdi mdi-logout text-primary"></i> {{ __('Logout') }}
                     </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
+
+
+
+
+
+
+
+
             </li>
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"

@@ -23,10 +23,6 @@
 </head>
 
 <body>
-
-    {{-- ///////////////// --}}
-
-
     <div class="container-scroller">
         @include('layouts.inc.admin.navbar')
         <div class="container-fluid page-body-wrapper">
@@ -38,9 +34,6 @@
             </div>
         </div>
     </div>
-
-    {{-- //////////////////////////////////// --}}
-    {{-- /////////////////////////////////// --}}
     <!-- plugins:js -->
     <script src="{{ asset('admin/vendors/base/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
