@@ -45,9 +45,6 @@ class CategoryController extends Controller
         $category->meta_description = $validateData['meta_description'];
         $category->status = $request->status == true ? '1' : '0';
         $category->save();
-
         return redirect()->route('category.index')->with('message', 'Category Added Successfuly');
-
-
     }
 }
