@@ -72,7 +72,7 @@
         </div>
     </div>
 </div>
-
+{{-- //push to stack --}}
 @push('script')
 <script>
     window.addEventListener('close-modal', event=>{
