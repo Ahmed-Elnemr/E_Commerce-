@@ -28,7 +28,7 @@
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->status == '1' ? 'Hidden' : 'Visable' }}</td>
                                     <td>
-                                        <a href="" class="btn btn-success">Edite</a>
+                                        <a href="{{route('category.edit',$category->id)}}" class="btn btn-success">Edite</a>
                                         <a href="" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>

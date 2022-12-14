@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Error;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\CategoryFormRequest;
-use Error;
 use Symfony\Component\HttpKernel\Attribute\Cache;
 
 class CategoryController extends Controller
@@ -22,7 +23,7 @@ class CategoryController extends Controller
         return view('admin.category.create');
     }
 
-    //
+    //store
     function store(CategoryFormRequest $request)
     {
         $validateData = $request->validated();
@@ -46,5 +47,41 @@ class CategoryController extends Controller
         $category->status = $request->status == true ? '1' : '0';
         $category->save();
         return redirect()->route('category.index')->with('message', 'Category Added Successfuly');
+    }
+
+    //edite
+    function edit(Category $category)
+    {
+        return view('admin.category.edit', [
+            'category' => $category,
+        ]);
+    }
+
+    //update
+    function update(CategoryFormRequest $request,  $category){
+        $validateData = $request->validated();
+        $category=Category::findOrfail($category);
+        $category->name = $validateData['name'];
+        $category->slug = Str::slug($validateData['slug']);
+        $category->description = $validateData['description'];
+        //image request
+        if ($request->hasFile('image')) {
+            //check if image existed  if this  existed will delete it
+            $path = 'uploads/categorys/'.$request->image;
+            if(File::exists($path)){
+                File::delete($path);
+            }
+            $file = $request->file('image');
+            $ext = $file->getClientOriginalExtension();
+            $fileName = time() . '.' . $ext;
+            $file->move('uploads/categorys/', $fileName);
+            $category->image = $fileName;
+        }
+        $category->meta_title = $validateData['meta_title'];
+        $category->meta_keyword = $validateData['meta_keyword'];
+        $category->meta_description = $validateData['meta_description'];
+        $category->status = $request->status == true ? '1' : '0';
+        $category->update();
+        return redirect()->route('category.index')->with('message', 'Category updated Successfuly');
     }
 }
